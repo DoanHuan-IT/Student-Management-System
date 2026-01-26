@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
-const MainLayout = ({ user, handleLogout, title = "Dashboard" }) => {
+const MainLayout = ({ user, handleLogout, title = "DASHBOARD" }) => {
     return (
         <div className="min-h-screen bg-gray-50 font-sans text-gray-900 flex">
             <Sidebar user={user} handleLogout={handleLogout} />

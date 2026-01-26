@@ -10,3 +10,13 @@ export const getUsersAPI = async () => {
         throw error;
     }
 };
+
+export const updateUserProfileAPI = async (id, updatedData) => {
+    try {
+        const response = await axios.put(`${USER_API}/${id}`, updatedData);
+        return response.data;
+    } catch (error) {
+        console.error("Error when updating users:", error);
+        throw error;
+    }
+}

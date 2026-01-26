@@ -18,19 +18,35 @@ const TeacherProfile = ({user}) => {
             <div className="mt-8 border-t border-gray-100 pt-6 space-y-4">
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Teacher ID</span>
-                    <span className="font-medium">{user.teacherID || "---"}</span>
+                    <span className="font-medium">{user.id || "N/A"}</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
-                    <span className="text-gray-500">Class Management:</span>
-                    <span className="font-medium">{user.classManagement || "---"}</span>
+                    <span className="text-gray-500">Username:</span>
+                    <span className="font-medium">{user.username || "N/A"}</span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                    <span className="text-gray-500">Full Name:</span>
+                    <span className="font-medium">{user.profile?.fullName || "N/A"}</span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                    <span className="text-gray-500">Teacher Id:</span>
+                    <span className="font-medium">{user.profile?.teacherCode || "N/A"}</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Gender:</span>
-                    <span className="font-medium">{user.gender || "---"}</span>
+                    <span className="font-medium">{user.profile?.gender || "N/A"}</span>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Phone:</span>
-                    <span className="font-medium">{user.phone || "---"}</span>
+                    <span className="font-medium">{user.profile?.phone || "N/A"}</span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                    <span className="text-gray-500">Address:</span>
+                    <span className="font-medium">{user.profile?.address || "N/A"}</span>
+                </div>
+                <div className="flex justify-between border-b pb-2">
+                    <span className="text-gray-500">Class Management:</span>
+                    <span className="font-medium">{user.profile?.classManagement || "N/A"}</span>
                 </div>
             </div>
         </div>

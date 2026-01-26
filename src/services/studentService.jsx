@@ -20,3 +20,13 @@ export const getStudentsAPI = async () => {
 //         throw error;
 //     }
 // }
+
+export const updateStudentProfileAPI = async (id, updatedData) => {
+    try {
+        const response = await axios.put(`${STUDENT_API}/${id}`, updatedData);
+        return response.data;
+    } catch (error) {
+        console.error("Error when updating students:", error);
+        throw error;
+    }
+}

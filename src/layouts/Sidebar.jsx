@@ -71,7 +71,7 @@ const Sidebar = ({user, handleLogout}) => {
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
                         <SidebarItem to="/teacher-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Management</p>
-                        <SidebarItem to="/students" icon={HiMiniUsers} label="Students" />
+                        <SidebarItem to="/my-class" icon={HiMiniUsers} label="My Class" />
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Account</p>
                         <SidebarItem to={profilePath} icon={BiUserCircle} label="Profile" />
                         <SidebarItem to={settingPath} icon={MdSettings} label="Setting" />

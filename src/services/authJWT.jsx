@@ -18,7 +18,7 @@ export const loginAPI = async (username, password) => {
     }
 
     if (responseStudent.data && responseStudent.data.length > 0) {
-        const student = responseStudent.data[0];
+        const student = responseStudent.data.find(st => st.username === username);
         const studentUser = {
             ...student,
             fullName: student.profile?.fullName //mapping

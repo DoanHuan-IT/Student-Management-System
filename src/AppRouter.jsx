@@ -66,7 +66,8 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                         <>
                             <Route path="/teacher-dashboard" element={<div>Teacher Dashboard</div>}/>
                             <Route path="/teacher-profile" element={<TeacherProfile user={user}/>}/>
-                            <Route path="/students" element={<StudentList user={user}/>}/>
+                            {/* <Route path="/students" element={<StudentList user={user}/>}/> */}
+                            <Route path="/my-class" element={<div>My Class</div>}/>"
                             <Route path="/teacher-setting" element={<div>Teacher Setting</div>}/>
                         </>
                     )}
