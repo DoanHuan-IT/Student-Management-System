@@ -4,7 +4,7 @@ import { FaBell } from "react-icons/fa";
 
 const Header = ({ title, user }) => {
     return (
-        <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-20">
+        <header className="h-30 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-20">
 
         <h2 className="text-xl font-bold text-gray-800">{title}</h2>
 
@@ -26,7 +26,7 @@ const Header = ({ title, user }) => {
 
             <div className="flex items-center gap-3 pl-6 border-l border-gray-200">
                 <div className="text-right hidden sm:block">
-                    <p className="text-sm font-bold text-gray-700">{user?.fullName}</p>
+                    <p className="text-sm font-bold text-gray-700">{user.profile?.fullName}</p>
                     <p className="text-xs text-gray-400">{user?.role}</p>
                 </div>
                     <img

@@ -1,9 +1,9 @@
 import React from "react";
-import { MdSpaceDashboard, MdClass, MdAdminPanelSettings } from "react-icons/md";
+import { MdSpaceDashboard, MdClass, MdAdminPanelSettings, MdSettings } from "react-icons/md";
 import { HiMiniUsers, HiUserGroup } from "react-icons/hi2";
 import { BiLogOut, BiUserCircle } from "react-icons/bi";
 import {NavLink} from "react-router-dom";
-import Logo from "../assets/sms-logo.png";
+import Logo from "/images/logos/studentmanagementsystem-removebg-preview.png";
 
 
 const SidebarItem = ({to, icon: Icon, label}) => ( // eslint-disable-line no-unused-vars
@@ -20,13 +20,34 @@ const SidebarItem = ({to, icon: Icon, label}) => ( // eslint-disable-line no-unu
     </NavLink>
 )
 
+const getProfilePath = ({user}) => {
+    switch (user?.role) {
+        case 'admin': return "/admin-profile";
+        case 'teacher': return "/teacher-profile";
+        case 'student': return "/student-profile";
+        default: return "/login";
+    }
+}
+
+const getSettingPath = ({user}) => {
+    switch (user?.role) {
+        case "admin": return "/admin-setting";
+        case "teacher": return "/teacher-setting";
+        case "student": return "/student-setting";
+        default: return "/login";
+    }
+}
+
 const Sidebar = ({user, handleLogout}) => {
     const role = user?.role || "";
+    const profilePath = getProfilePath({user});
+    const settingPath = getSettingPath({user});
+
+
 
     return (
         <aside className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen fixed left-0 top-0 z-10">
-            <div className="h-20 flex items-center px-8 border-b border-gray-100">
-                {/* <h1 className="text-2xl font-bold text-gray-800 tracking-tight">Demo Project</h1> */}
+            <div className="h-30 flex items-center px-8 border-b border-gray-100">
                 <img src={Logo} alt="logo"></img>
             </div>
 
@@ -34,40 +55,38 @@ const Sidebar = ({user, handleLogout}) => {
                 {(role === 'admin') && (
                     <>
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
-                        <SidebarItem to="/dashboard" icon={MdSpaceDashboard} label="Dashboard" />
+                        <SidebarItem to="/admin-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
                         <SidebarItem to="/admins" icon={MdAdminPanelSettings} label="Admins"/>
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Management</p>
                         <SidebarItem to="/teachers" icon={HiUserGroup} label="Teachers" />
                         <SidebarItem to="/students" icon={HiMiniUsers} label="Students" />
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Account</p>
+                        <SidebarItem to={profilePath} icon={BiUserCircle} label="Profile" />
+                        <SidebarItem to={settingPath} icon={MdSettings} label="Setting" />
                     </>
                 )}
 
-                {/* {(role === 'admin' || role === 'teacher') && (
-                    <>
-                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Management</p>
-                        
-                        {role === 'admin' && (
-                            <SidebarItem to="/teachers" icon={HiUserGroup} label="Teachers" />
-                        )}
-
-                        <SidebarItem to="/teacher-profile" icon={BiUserCircle} label="My Profile" />
-                        <SidebarItem to="/students" icon={HiMiniUsers} label="Students" />
-                    </>
-                )} */}
-
                 {(role === 'teacher') && (
                     <>
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
+                        <SidebarItem to="/teacher-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Management</p>
-                        <SidebarItem to="/teacher-profile" icon={BiUserCircle} label="My Profile" />
                         <SidebarItem to="/students" icon={HiMiniUsers} label="Students" />
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Account</p>
+                        <SidebarItem to={profilePath} icon={BiUserCircle} label="Profile" />
+                        <SidebarItem to={settingPath} icon={MdSettings} label="Setting" />
                     </>
                 )}
 
                 {(role === 'student') && (
                     <>
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
+                        <SidebarItem to="/student-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Learning</p>
-                        <SidebarItem to="/student-profile" icon={BiUserCircle} label="My Profile" />
                         <SidebarItem to="/my-class" icon={MdClass} label="My Class" />
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-4">Account</p>
+                        <SidebarItem to={profilePath} icon={BiUserCircle} label="Profile" />
+                        <SidebarItem to={settingPath} icon={MdSettings} label="Setting" />
                     </>
                 )}
             </div>
@@ -85,4 +104,4 @@ const Sidebar = ({user, handleLogout}) => {
     )
 }
 
-export default Sidebar
+export default Sidebar;

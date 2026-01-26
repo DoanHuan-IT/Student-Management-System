@@ -5,6 +5,7 @@ import JWTAuthPage from "./pages/JWTAuthPage";
 //Admin import
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminList from "./components/Admin/AdminList";
+import AdminProfile from "./components/Admin/AdminProfile";
 
 //Teacher import
 import TeacherList from "./components/Teacher/TeacherList";
@@ -16,19 +17,21 @@ import StudentProfile from "./components/Student/StudentProfile";
 
 //main
 import MainLayout from "./layouts/MainLayout";
-import MyProfile from "./components/Student/StudentProfile";
 
 const ForbiddenPage = () => <h1 className="text-center mt-10 text-red-500">403 - Forbidden!!!</h1>;
 
 export default function AppRouter({user, handleLogin, handleLogout}) {
+    console.log("LOGIN USER DATA:", user);
     const isAuthenticated = !!user;
     const userRole = user?.role || "";
 
     const defaultPatch = () => {
         if (userRole === 'student') {
             return "/student-dashboard";
+        } else if (userRole === 'teacher') {
+            return "/teacher-dashboard";
         }
-        return "/dashboard";
+        return "/admin-dashboard";
     }
 
     return (
@@ -40,10 +43,12 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                     {/* Admin */}
                     {userRole === 'admin' && (
                         <>
-                            <Route path="/dashboard" element={<AdminDashboard />}/>
+                            <Route path="/admin-dashboard" element={<AdminDashboard />}/>
                             <Route path="/admins" element={<AdminList user={user}/>}/>
                             <Route path="/teachers" element={<TeacherList user={user}/>}/>
                             <Route path="/students" element={<StudentList user={user}/>}/>
+                            <Route path="/admin-profile" element={<AdminProfile user={user}/>}/>
+                            <Route path="/admin-setting" element={<div>Admin Setting</div>}/>
                         </>
                     )}
                     
@@ -59,8 +64,10 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
 
                     {(userRole === 'teacher') && (
                         <>
+                            <Route path="/teacher-dashboard" element={<div>Teacher Dashboard</div>}/>
                             <Route path="/teacher-profile" element={<TeacherProfile user={user}/>}/>
                             <Route path="/students" element={<StudentList user={user}/>}/>
+                            <Route path="/teacher-setting" element={<div>Teacher Setting</div>}/>
                         </>
                     )}
 
@@ -70,6 +77,7 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                             <Route path="/student-dashboard" element={<div>Student Dashboard</div>}/>
                             <Route path="/student-profile" element={<StudentProfile user={user}/>}/>
                             <Route path="/my-class" element={<div>My Class</div>}/>
+                            <Route path="/student-setting" element={<div>Student Setting</div>}/>
 
                             <Route path="/dashboard" element={<Navigate to="/student-dashboard" replace />} />
                         </>

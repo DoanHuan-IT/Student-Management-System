@@ -15,7 +15,7 @@ const StudentList = ({user}) => {
                 if (user?.role === 'admin') {
                     setStudents(allStudents);
                 } else if (user?.role === 'teacher') {
-                    const myStudents = allStudents.filter(st => st.class === user.classManagement);
+                    const myStudents = allStudents.filter(st => st.classId === user.classManagement);
                     setStudents(myStudents);
                 }
             } catch (error) {
@@ -40,28 +40,39 @@ const StudentList = ({user}) => {
             <table className="w-full text-left border-collapse">
                 <thead className="bg-gray-100 text-gray-700 uppercase text-sm">
                     <tr>
+                    
                         <th className="p-4 border-b">Student ID</th>
-                        <th className="p-4 border-b">Full Name</th>
                         <th className="p-4 border-b">Username</th>
+                        <th className="p-4 border-b">Password</th>
+                        <th className="p-4 border-b">Full Name</th>
+                        <th className="p-4 border-b">Student Code</th>
                         <th className="p-4 border-b">Phone</th>
                         <th className="p-4 border-b">Gender</th>
                         <th className="p-4 border-b">Address</th>
+                        <th className="p-4 border-b">Class ID</th>
                     </tr>
                 </thead>
 
                 <tbody className="text-sm text-gray-600">
                     {students.map((student) => (
                         <tr key={student.id} className="hover:bg-gray-50 border-b last:border-0">
-                            <td className="p-4 font-bold text-blue-600">{student.studentID}</td>
-                            <td className="p-4 font-bold text-gray-700">{student.studentName}</td>
-                            <td className="p-4 font-bold">{student.username}</td>
-                            <td className="p-4 font-bold">{student.phone}</td>
-                            <td className="p-4 font-bold">{student.gender}</td>
-                            <td className="p-4 font-bold">{student.address}</td>
+                            <td className="p-4 font-bold text-blue-600">{student.id}</td>
+                            <td className="p-4 font-bold text-gray-700">{student.username}</td>
+                            <td className="p-4 font-bold text-gray-700">{student.password}</td>
+                            <td className="p-4 font-bold">{student.profile?.fullName}</td>
+                            <td className="p-4 font-bold">{student.profile?.studentCode}</td>
+                            <td className="p-4 font-bold">{student.profile?.gender}</td>
+                            <td className="p-4 font-bold">{student.profile?.phone}</td>
+                            <td className="p-4 font-bold">{student.profile?.address}</td>
+                            <td className="p-4 font-bold">{student.profile?.classId || "N/A"}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+            <div>
+                
+            </div>
         </div>
     );
 };

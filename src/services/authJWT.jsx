@@ -1,6 +1,6 @@
 import axios from "axios";
 import {USER_API} from "../utils/constants";
-import { STUDENT_API } from "../utils/constants";
+import {STUDENT_API} from "../utils/constants";
 
 export const loginAPI = async (username, password) => {
     const requestUser = axios.get(`${USER_API}?username=${username}&password=${password}`
@@ -21,7 +21,7 @@ export const loginAPI = async (username, password) => {
         const student = responseStudent.data[0];
         const studentUser = {
             ...student,
-            fullName: student.studentName //mapping
+            fullName: student.profile?.fullName //mapping
         }
         return saveUserToStorage(studentUser, "student-token");
     }
