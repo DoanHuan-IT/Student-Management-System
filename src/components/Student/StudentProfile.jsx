@@ -1,6 +1,49 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {updateStudentProfileAPI} from "../../services/studentService";
 
 const StudentProfile = ({user}) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState(user); //copy data
+
+    useEffect(() => {
+        setFormData(user);
+    }, [user])
+
+    const handleChange = (e) => {
+        const {name, value} = e.target; //take input
+
+        if (name === "password") {
+            setFormData({...formData, password: value});
+        }
+        else {
+            setFormData({
+                ...formData,
+                profile: {
+                    ...formData.profile,
+                    [name]: value
+                }
+            })
+        }
+    }
+    
+    const handleSave = async () => {
+        try {
+            await updateStudentProfileAPI(user.id, formData);
+
+            const currentUser = JSON.parse(localStorage.getItem("user"));
+            const newUser = {...formData, accessToken: currentUser.accessToken};
+            localStorage.setItem("user", JSON.stringify(newUser));
+
+            alert("The information has been updated!")
+            setIsEditing(false);
+        } catch (error) {
+            alert("Error: ", error)
+        }
+    }
+
+    const profile = formData.profile || {};
+
+
     return (
         <div className="max-w-2xl mx-auto bg-white shadow rounded-lg p-6 mt-10">
             <div className="flex flex-col items-center">
@@ -20,33 +63,128 @@ const StudentProfile = ({user}) => {
                     <span className="text-gray-500">Student ID</span>
                     <span className="font-medium">{user.id || "N/A"}</span>
                 </div>
+                
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Username:</span>
-                    <span className="font-medium">{user.username || "N/A"}</span>
+                    {isEditing ? (
+                        <input
+                            name="username"
+                            value=""
+                            onChange={handleChange}
+                            className="border p-1 rounded w-1/2 text-right"
+                        />
+                    ) : (
+                        <span className="font-medium">{formData.username || "N/A"}</span>
+                    )}
                 </div>
+                
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Password:</span>
-                    <span className="font-medium">{user.password || "N/A"}</span>
+                    {isEditing ? (
+                        <input
+                            name="password"
+                            value=""
+                            onChange={handleChange}
+                            className="border p-1 rounded w-1/2 text-right"
+                        />
+                    ) : (
+                        <span className="font-medium">{formData.password || "N/A"}</span>
+                    )}
                 </div>
+                
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Full Name:</span>
-                    <span className="font-medium">{user.profile?.fullName || "N/A"}</span>
+                    {isEditing ? (
+                        <input
+                            name="fullName"
+                            value=""
+                            onChange={handleChange}
+                            className="border p-1 rounded w-1/2 text-right"
+                        />
+                    ) : (
+                        <span className="font-medium">{profile.fullName || "N/A"}</span>
+                    )}
                 </div>
+                
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Student Code:</span>
                     <span className="font-medium">{user.profile?.studentCode || "N/A"}</span>
                 </div>
+                
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Gender:</span>
-                    <span className="font-medium">{user.profile?.gender || "N/A"}</span>
+                    {isEditing ? (
+                        <input
+                            name="gender"
+                            value=""
+                            onChange={handleChange}
+                            className="border p-1 rounded w-1/2 text-right"
+                        />
+                    ) : (
+                        <span className="font-medium">{profile.gender || "N/A"}</span>
+                    )}
                 </div>
+
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Phone:</span>
-                    <span className="font-medium">{user.profile?.phone || "N/A"}</span>
+                    {isEditing ? (
+                        <input
+                            name="phone"
+                            value=""
+                            onChange={handleChange}
+                            className="border p-1 rounded w-1/2 text-right"
+                        />
+                    ) : (
+                        <span className="font-medium">{profile.phone || "N/A"}</span>
+                    )}
                 </div>
+
                 <div className="flex justify-between border-b pb-2">
                     <span className="text-gray-500">Address:</span>
-                    <span className="font-medium">{user.profile?.address || "N/A"}</span>
+                    {isEditing ? (
+                        <input
+                            name="address"
+                            value=""
+                            onChange={handleChange}
+                            className="border p-1 rounded w-1/2 text-right"
+                        />
+                    ) : (
+                        <span className="font-medium">{profile.address || "N/A"}</span>
+                    )}
+                </div>
+
+                <div className="flex justify-between border-b pb-2 bg-gray-50 p-2 rounded">
+                    <span className="text-gray-500">Class:</span>
+                    <span className="font-medium">{profile.classId || "N/A"}</span>
+                </div>
+
+                <div className="mt-4 flex gap-2">
+                    {!isEditing ? (
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700"
+                        >
+                            Edit
+                        </button>
+                    ) : (
+                        <>
+                            <button
+                                onClick={handleSave}
+                                className="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700"
+                            >
+                                Save
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setIsEditing(false);
+                                    setFormData(user); //Reset old data
+                                }}
+                                className="bg-gray-400 text-white px-4 py-2 rounded text-sm hover:bg-gray-500"
+                            >
+                                Cancel
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

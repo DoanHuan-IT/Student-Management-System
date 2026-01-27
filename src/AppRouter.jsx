@@ -21,7 +21,6 @@ import MainLayout from "./layouts/MainLayout";
 const ForbiddenPage = () => <h1 className="text-center mt-10 text-red-500">403 - Forbidden!!!</h1>;
 
 export default function AppRouter({user, handleLogin, handleLogout}) {
-    console.log("LOGIN USER DATA:", user);
     const isAuthenticated = !!user;
     const userRole = user?.role || "";
 
