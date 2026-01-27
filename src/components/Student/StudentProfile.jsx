@@ -27,12 +27,26 @@ const StudentProfile = ({user}) => {
     }
     
     const handleSave = async () => {
+        const cleanData = {
+            id: user.id,
+            username: formData.username,
+            password: formData.password,
+            role: "student",
+            profile: {
+                fullName: formData.profile.fullName,
+                studentCode: formData.profile.studentCode,
+                gender: formData.profile.gender,
+                phone: formData.profile.phone,
+                address: formData.profile.address,
+                classId: formData.profile.classId
+            }
+        };
         try {
-            await updateStudentProfileAPI(user.id, formData);
+            await updateStudentProfileAPI(user.id, cleanData);
 
             const currentUser = JSON.parse(localStorage.getItem("user"));
-            const newUser = {...formData, accessToken: currentUser.accessToken};
-            localStorage.setItem("user", JSON.stringify(newUser));
+            const newStorage = {...cleanData, accessToken: currentUser.accessToken};
+            localStorage.setItem("user", JSON.stringify(newStorage));
 
             alert("The information has been updated!")
             setIsEditing(false);
@@ -69,7 +83,7 @@ const StudentProfile = ({user}) => {
                     {isEditing ? (
                         <input
                             name="username"
-                            value=""
+                            value={formData.username}
                             onChange={handleChange}
                             className="border p-1 rounded w-1/2 text-right"
                         />
@@ -83,7 +97,7 @@ const StudentProfile = ({user}) => {
                     {isEditing ? (
                         <input
                             name="password"
-                            value=""
+                            value={formData.password}
                             onChange={handleChange}
                             className="border p-1 rounded w-1/2 text-right"
                         />
@@ -97,7 +111,7 @@ const StudentProfile = ({user}) => {
                     {isEditing ? (
                         <input
                             name="fullName"
-                            value=""
+                            value={profile.fullName}
                             onChange={handleChange}
                             className="border p-1 rounded w-1/2 text-right"
                         />
@@ -116,7 +130,7 @@ const StudentProfile = ({user}) => {
                     {isEditing ? (
                         <input
                             name="gender"
-                            value=""
+                            value={profile.gender}
                             onChange={handleChange}
                             className="border p-1 rounded w-1/2 text-right"
                         />
@@ -130,7 +144,7 @@ const StudentProfile = ({user}) => {
                     {isEditing ? (
                         <input
                             name="phone"
-                            value=""
+                            value={profile.phone}
                             onChange={handleChange}
                             className="border p-1 rounded w-1/2 text-right"
                         />
@@ -144,7 +158,7 @@ const StudentProfile = ({user}) => {
                     {isEditing ? (
                         <input
                             name="address"
-                            value=""
+                            value={profile.address}
                             onChange={handleChange}
                             className="border p-1 rounded w-1/2 text-right"
                         />
