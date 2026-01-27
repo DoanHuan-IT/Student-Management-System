@@ -59,7 +59,7 @@ const StudentProfile = ({user}) => {
 
 
     return (
-        <div className="max-w-2xl mx-auto bg-white shadow rounded-lg p-6 mt-10">
+        <div className="max-w-2xl mx-auto bg-white shadow rounded-lg p-6">
             <div className="flex flex-col items-center">
                 <img
                     src={user.avatar}

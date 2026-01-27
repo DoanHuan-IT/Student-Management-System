@@ -39,7 +39,7 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
             
             <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole} allowedRoles={["admin", "teacher", "student"]} />}>
                 <Route element={<MainLayout user={user} handleLogout={handleLogout}/>}>
-                    {/* Admin */}
+
                     {userRole === 'admin' && (
                         <>
                             <Route path="/admin-dashboard" element={<AdminDashboard />}/>
@@ -50,16 +50,6 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                             <Route path="/admin-setting" element={<div>Admin Setting</div>}/>
                         </>
                     )}
-                    
-                    {/* Admin && Teacher */}
-                    {/* {(userRole === 'admin' || userRole === 'teacher') && (
-                        <>
-                            <Route path="/dashboard" element={<AdminDashboard />}/>
-                            <Route path="/teacher-profile" element={<TeacherProfile user={user}/>}/>
-                            <Route path="/students" element={<StudentList user={user}/>}/>
-
-                        </>
-                    )} */}
 
                     {(userRole === 'teacher') && (
                         <>
@@ -71,7 +61,6 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                         </>
                     )}
 
-                    {/* Student */}
                     {userRole === 'student' && (
                         <>
                             <Route path="/student-dashboard" element={<div>Student Dashboard</div>}/>
