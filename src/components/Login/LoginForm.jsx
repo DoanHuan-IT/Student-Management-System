@@ -59,9 +59,15 @@ const LoginForm = ({onSubmit}) => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value) }
                                     />
-                                    <span className='absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-900' onClick={togglePasswordVisibility}>
+                                    {/* Thay thẻ span bằng button */}
+                                    <button
+                                        type="button" // Quan trọng: Để không bị hiểu nhầm là nút submit
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-gray-900 focus:outline-none"
+                                        onClick={togglePasswordVisibility}
+                                        data-testid="toggle-password" // Thêm cái này để dễ select trong file test
+                                    >
                                         {showPassword ? <FaEye /> : <FaEyeSlash />}
-                                    </span>
+                                    </button>
                                 </div>
                             </div>
 
