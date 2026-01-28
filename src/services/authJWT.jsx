@@ -1,6 +1,6 @@
 import axios from "axios";
-import {USER_API} from "../utils/constants";
-import {STUDENT_API} from "../utils/constants";
+import {USER_API} from "~/utils/constants";
+import {STUDENT_API} from "~/utils/constants";
 
 export const loginAPI = async (username, password) => {
     const requestUser = axios.get(`${USER_API}?username=${username}&password=${password}`

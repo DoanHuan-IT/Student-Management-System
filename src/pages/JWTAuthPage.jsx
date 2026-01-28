@@ -1,5 +1,5 @@
-import LoginForm from "../components/Login/LoginForm";
-import {loginAPI} from "../services/authJWT";
+import LoginForm from "~/components/Login/LoginForm";
+import {loginAPI} from "~/services/authJWT";
 
 const AuthPage = ({onLoginSuccess}) => {
     const handleLogin = async (username, password) => {

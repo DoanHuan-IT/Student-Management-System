@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import {updateUserProfileAPI} from "../../services/userService";
+import {updateUserProfileAPI} from "~/services/userService";
 
 const TeacherProfile = ({user}) => {
     const [isEditing, setIsEditing] = useState(false);

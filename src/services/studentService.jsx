@@ -1,5 +1,5 @@
 import axios from "axios";
-import { STUDENT_API } from "../utils/constants";
+import { STUDENT_API } from "~/utils/constants";
 
 export const getStudentsAPI = async () => {
     try {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_API } from "../utils/constants";
+import { USER_API } from "~/utils/constants";
 
 export const getUsersAPI = async () => {
     try {

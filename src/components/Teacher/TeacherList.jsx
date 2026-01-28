@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {getUsersAPI} from "../../services/userService";
+import {getUsersAPI} from "~/services/userService";
 
 const TeacherList = ({user}) => {
     const [teachers, setTeachers] = useState([]);
