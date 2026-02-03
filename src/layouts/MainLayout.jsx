@@ -16,5 +16,4 @@ const MainLayout = ({ user, handleLogout, title = "DASHBOARD" }) => {
         </div>
     );
 };
-
 export default MainLayout;

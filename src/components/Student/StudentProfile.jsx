@@ -31,7 +31,7 @@ const StudentProfile = ({user}) => {
             id: user.id,
             username: formData.username,
             password: formData.password,
-            role: "student",
+            role: "Student",
             profile: {
                 fullName: formData.profile.fullName,
                 studentCode: formData.profile.studentCode,

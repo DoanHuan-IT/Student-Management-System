@@ -29,7 +29,7 @@ const TeacherProfile = ({user}) => {
             id: user.id,
             username: formData.username,
             password: formData.password,
-            role: "teacher",
+            role: "Teacher",
             profile: {
                 fullName: formData.profile.fullName,
                 teacherCode: formData.profile.teacherCode,

@@ -1,6 +1,6 @@
 import {describe, it, expect, vi} from "vitest";
 import axios from "axios";
-import {getUsersAPI, updateUserProfileAPI} from "./userService";
+import {getUsersAPI, } from "./userService";
 import {USER_API} from "~/utils/constants";
 
 vi.mock("axios");

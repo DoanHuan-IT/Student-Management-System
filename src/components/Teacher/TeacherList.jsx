@@ -4,20 +4,26 @@ import {getUsersAPI} from "~/services/userService";
 const TeacherList = ({user}) => {
     const [teachers, setTeachers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!user) return;
+        if (!user) {
+            setLoading(false);
+            return;
+        }
 
         const fetchData = async () => {
             setLoading(true);
+            setError(null);
             try {
                 const allUsers = await getUsersAPI();
-                if (user?.role === 'admin') {
-                    const listTeachers = allUsers.filter(u => u.role === 'teacher');
+                if (user?.role === 'Admin') {
+                    const listTeachers = allUsers.filter(u => u.role === 'Teacher');
                     setTeachers(listTeachers);
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
+                setError('The list could not be loaded. Please try again!')
             } finally {
                 setLoading(false);
             }
@@ -28,6 +34,8 @@ const TeacherList = ({user}) => {
     if (!user) return <div className="text-center p-5 font-bold">Checking user permission...</div>
 
     if (loading) return <div className="text-center p-5 font-bold">Loading data...</div>
+
+    if (error) return <div className="text-center p-5 text-red-500">Error: {error}</div>
 
     if (!loading && teachers.length === 0) {
         return <div className="text-center p-10 text-gray-500 font-bold">There are no teachers on the list.</div>

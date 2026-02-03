@@ -12,27 +12,36 @@ export const loginAPI = async (username, password) => {
 
     if (responseUser.data && responseUser.data.length > 0) {
         const user = responseUser.data.find(u => u.username === username);
-        if (user?.role === 'admin' || user?.role === 'teacher') {
-            const normalizedUser = {
-                ...user,    //take infor
-                ...(user.profile || {}),    //take profile
-            }
-            return saveUserToStorage(normalizedUser, "user-token");
+        // if (user?.role === 'admin' || user?.role === 'teacher') {
+        //     const normalizedUser = {
+        //         ...user,    //take infor
+        //         ...(user.profile || {}),    //take profile
+        //     }
+        //     return saveUserToStorage(normalizedUser, "user-token");
+        // }
+        if (user && user.password === password && (user.role === 'Admin' || user.role === 'Teacher')) {
+            // KHÔNG CẦN NORMALIZED: Lưu nguyên bản cấu trúc nested profile
+            // Để đồng bộ với chức năng Update Profile
+            return saveUserToStorage(user, "user-token");
         }
     }
 
     if (responseStudent.data && responseStudent.data.length > 0) {
         const student = responseStudent.data.find(st => st.username === username);
-        if (student){
-            const normalizedStudent = {
-                ...student,
-                ...(student.profile || {}),
-                fullName: student.profile?.fullName
-            }
-            return saveUserToStorage(normalizedStudent, "student-token");
+        // if (student){
+        //     const normalizedStudent = {
+        //         ...student,
+        //         ...(student.profile || {}),
+        //         fullName: student.profile?.fullName
+        //     }
+        //     return saveUserToStorage(normalizedStudent, "student-token");
+        // }
+        if (student && student.password === password) {
+            // Lưu nguyên bản student (có chứa object profile bên trong)
+            return saveUserToStorage(student, "student-token");
         }
     }
-    throw new Error("Invalid username or password");
+    throw new Error("Invalid username or password!");
 }
 
 export const logoutAPI = () => {

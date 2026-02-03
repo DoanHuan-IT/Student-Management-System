@@ -26,7 +26,7 @@ import {
 
 import { GiAchievement } from "react-icons/gi";
 import {NavLink} from "react-router-dom";
-import Logo from "/images/logos/studentmanagementsystem-removebg-preview.png";
+import Logo from "~/assets/images/logos/studentmanagementsystem-removebg-preview.png";
 
 
 const SidebarItem = ({to, icon: Icon, label}) => ( // eslint-disable-line no-unused-vars
@@ -45,18 +45,18 @@ const SidebarItem = ({to, icon: Icon, label}) => ( // eslint-disable-line no-unu
 
 const getProfilePath = ({user}) => {
     switch (user?.role) {
-        case 'admin': return "/admin-profile";
-        case 'teacher': return "/teacher-profile";
-        case 'student': return "/student-profile";
+        case 'Admin': return "/admin-profile";
+        case 'Teacher': return "/teacher-profile";
+        case 'Student': return "/student-profile";
         default: return "/login";
     }
 }
 
 const getSettingPath = ({user}) => {
     switch (user?.role) {
-        case "admin": return "/admin-setting";
-        case "teacher": return "/teacher-setting";
-        case "student": return "/student-setting";
+        case "Admin": return "/admin-setting";
+        case "Teacher": return "/teacher-setting";
+        case "Student": return "/student-setting";
         default: return "/login";
     }
 }
@@ -66,8 +66,6 @@ const Sidebar = ({user, handleLogout}) => {
     const profilePath = getProfilePath({user});
     const settingPath = getSettingPath({user});
 
-
-
     return (
         <aside className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen fixed left-0 top-0 z-10">
             <div className="h-30 flex items-center px-8 border-b border-gray-100">
@@ -75,7 +73,7 @@ const Sidebar = ({user, handleLogout}) => {
             </div>
 
             <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-                {(role === 'admin') && (
+                {(role === 'Admin') && (
                     <>
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
                         <SidebarItem to="/admin-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
@@ -92,7 +90,7 @@ const Sidebar = ({user, handleLogout}) => {
                     </>
                 )}
 
-                {(role === 'teacher') && (
+                {(role === 'Teacher') && (
                     <>
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
                         <SidebarItem to="/teacher-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
@@ -108,7 +106,7 @@ const Sidebar = ({user, handleLogout}) => {
                     </>
                 )}
 
-                {(role === 'student') && (
+                {(role === 'Student') && (
                     <>
                         <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Overview</p>
                         <SidebarItem to="/student-dashboard" icon={MdSpaceDashboard} label="Dashboard" />
@@ -136,5 +134,4 @@ const Sidebar = ({user, handleLogout}) => {
         </aside>
     )
 }
-
 export default Sidebar;

@@ -24,10 +24,10 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
     const isAuthenticated = !!user;
     const userRole = user?.role || "";
 
-    const defaultPatch = () => {
-        if (userRole === 'student') {
+    const defaultPath = () => {
+        if (userRole === 'Student') {
             return "/student-dashboard";
-        } else if (userRole === 'teacher') {
+        } else if (userRole === 'Teacher') {
             return "/teacher-dashboard";
         }
         return "/admin-dashboard";
@@ -35,12 +35,12 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
 
     return (
         <Routes>
-            <Route path="/login" element={!isAuthenticated ? <JWTAuthPage onLoginSuccess={handleLogin} /> : <Navigate to={defaultPatch()} />} />
+            <Route path="/login" element={!isAuthenticated ? <JWTAuthPage onLoginSuccess={handleLogin} /> : <Navigate to={defaultPath()} />} />
             
-            <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole} allowedRoles={["admin", "teacher", "student"]} />}>
+            <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole} allowedRoles={["Admin", "Teacher", "Student"]} />}>
                 <Route element={<MainLayout user={user} handleLogout={handleLogout}/>}>
 
-                    {userRole === 'admin' && (
+                    {userRole === 'Admin' && (
                         <>
                             <Route path="/admin-dashboard" element={<AdminDashboard />}/>
                             <Route path="/admins" element={<AdminList user={user}/>}/>
@@ -51,7 +51,7 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                         </>
                     )}
 
-                    {(userRole === 'teacher') && (
+                    {(userRole === 'Teacher') && (
                         <>
                             <Route path="/teacher-dashboard" element={<div>Teacher Dashboard</div>}/>
                             <Route path="/teacher-profile" element={<TeacherProfile user={user}/>}/>
@@ -61,7 +61,7 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                         </>
                     )}
 
-                    {userRole === 'student' && (
+                    {userRole === 'Student' && (
                         <>
                             <Route path="/student-dashboard" element={<div>Student Dashboard</div>}/>
                             <Route path="/student-profile" element={<StudentProfile user={user}/>}/>
@@ -73,7 +73,7 @@ export default function AppRouter({user, handleLogin, handleLogout}) {
                     )}
                 </Route>
             </Route>
-            <Route path="*" element={<Navigate to={isAuthenticated ? defaultPatch() : "/login"} />} />
+            <Route path="*" element={<Navigate to={isAuthenticated ? defaultPath() : "/login"} />} />
         </Routes>
     );
 }

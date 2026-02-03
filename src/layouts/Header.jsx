@@ -1,8 +1,15 @@
 import React from 'react';
+import maleDefault from '~/assets/images/avatars/default-male-avatar.png'
+import femaleDefault from '~/assets/images/avatars/default-female-avatar.png'
 import { IoMdSearch } from "react-icons/io";
 import { FaBell } from "react-icons/fa";
 
 const Header = ({ title, user }) => {
+
+    const displayName = user?.fullName || user?.profile?.fullName || user?.username || 'User';
+
+    const avatarUrl = user?.avatar || user?.profile?.avatar || (user?.gender === 'Male' ? maleDefault : femaleDefault )
+
     return (
         <header className="h-30 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-20">
 
@@ -26,11 +33,11 @@ const Header = ({ title, user }) => {
 
             <div className="flex items-center gap-3 pl-6 border-l border-gray-200">
                 <div className="text-right hidden sm:block">
-                    <p className="text-sm font-bold text-gray-700">{user.profile?.fullName}</p>
+                    <p className="text-sm font-bold text-gray-700">{displayName}</p>
                     <p className="text-xs text-gray-400">{user?.role}</p>
                 </div>
                     <img
-                        src={user?.avatar ? user.avatar : "https://i.pravatar.cc/150?img=12"} 
+                        src={avatarUrl}
                         alt="User"
                         className="w-10 h-10 rounded-full object-cover border border-gray-200"
                     />
@@ -40,5 +47,4 @@ const Header = ({ title, user }) => {
         </header>
     );
 };
-
 export default Header;

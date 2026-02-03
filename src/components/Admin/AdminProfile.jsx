@@ -31,7 +31,7 @@ const AdminProfile = ({user}) => {
             id: user.id,
             username: formData.username,
             password: formData.password,
-            role: "admin",
+            role: "Admin",
             profile: {
                 fullName: formData.profile.fullName,
                 gender: formData.profile.gender,
