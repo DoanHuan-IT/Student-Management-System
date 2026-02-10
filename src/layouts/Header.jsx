@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AppContext} from '~/context/AppContext';
 import maleDefault from '~/assets/images/avatars/default-male-avatar.png'
 import femaleDefault from '~/assets/images/avatars/default-female-avatar.png'
 import { IoMdSearch } from "react-icons/io";
 import { FaBell } from "react-icons/fa";
 
-const Header = ({ title, user }) => {
+
+const Header = ({ title}) => {
+    const {user} = useContext(AppContext);
 
     const displayName = user?.fullName || user?.profile?.fullName || user?.username || 'User';
 
@@ -42,7 +45,6 @@ const Header = ({ title, user }) => {
                         className="w-10 h-10 rounded-full object-cover border border-gray-200"
                     />
                 </div>
-
             </div>
         </header>
     );

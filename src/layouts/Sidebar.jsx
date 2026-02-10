@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
+import {AppContext} from '~/context/AppContext'
 import {
     MdSpaceDashboard,
     MdClass,
@@ -26,7 +27,7 @@ import {
 
 import { GiAchievement } from "react-icons/gi";
 import {NavLink} from "react-router-dom";
-import Logo from "~/assets/images/logos/studentmanagementsystem-removebg-preview.png";
+import Logo from "~/assets/images/logos/EduNexus-LMS.png";
 
 
 const SidebarItem = ({to, icon: Icon, label}) => ( // eslint-disable-line no-unused-vars
@@ -61,7 +62,8 @@ const getSettingPath = ({user}) => {
     }
 }
 
-const Sidebar = ({user, handleLogout}) => {
+const Sidebar = () => {
+    const {user, handleLogout} = useContext(AppContext);
     const role = user?.role || "";
     const profilePath = getProfilePath({user});
     const settingPath = getSettingPath({user});

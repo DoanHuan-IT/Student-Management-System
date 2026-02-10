@@ -1,0 +1,11 @@
+{
+    "welcome": "Welcome",
+    "login_subtitle": "Please enter all the required information to log in.",
+    "username": "Username",
+    "password": "Password",
+    "login_button": "Login",
+    "username_required": "Username is required",
+    "password_required": "Password is required",
+    "check_account": "Don't have an account?",
+    "register_here": "Register"
+}

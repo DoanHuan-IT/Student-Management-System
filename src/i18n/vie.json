@@ -1,0 +1,11 @@
+{
+    "welcome": "Chào mừng",
+    "login_subtitle": "Vui lòng nhập đầy đủ thông tin để đăng nhập.",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "login_button": "Đăng nhập",
+    "username_required": "Tên đăng nhập là bắt buộc",
+    "password_required": "Mật khẩu là bắt buộc",
+    "check_account": "Bạn chưa có tài khoản?",
+    "register_here": "Đăng ký"
+}

@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import {AppContext} from '~/context/AppContext';
 import {updateUserProfileAPI} from "~/services/userService"
 
-const AdminProfile = ({user}) => {
+const AdminProfile = () => {
+    const {user} = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState(user);
 
@@ -10,10 +12,10 @@ const AdminProfile = ({user}) => {
     }, [user])
 
     const handleChange = (e) => {
-        const [name, value] = e.target.value;
+        const {name, value} = e.target;
 
-        if (name === "password") {
-            setFormData({...formData, password: value})
+        if (name === 'password' || name === 'username') {
+            setFormData({...formData, [name]: value})
         }
         else {
             setFormData({
@@ -50,8 +52,9 @@ const AdminProfile = ({user}) => {
 
             alert("The information has been updated!")
             setIsEditing(false);
+            window.location.reload();
         } catch (error) {
-            alert("Error: ", error)
+            alert("Error: ", error.message)
         }
     }
 

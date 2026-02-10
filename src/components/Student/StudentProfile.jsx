@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import {AppContext} from '~/context/AppContext';
 import {updateStudentProfileAPI} from "~/services/studentService";
 
-const StudentProfile = ({user}) => {
+const StudentProfile = () => {
+    const {user} = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState(user); //copy data
 
@@ -12,8 +14,8 @@ const StudentProfile = ({user}) => {
     const handleChange = (e) => {
         const {name, value} = e.target; //take input
 
-        if (name === "password") {
-            setFormData({...formData, password: value});
+        if (name === "password" || name === "username") {
+            setFormData({...formData, [name]: value});
         }
         else {
             setFormData({
@@ -50,6 +52,7 @@ const StudentProfile = ({user}) => {
 
             alert("The information has been updated!")
             setIsEditing(false);
+            window.location.reload();
         } catch (error) {
             alert("Error: ", error)
         }

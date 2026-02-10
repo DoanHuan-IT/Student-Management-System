@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {AppContext} from '~/context/AppContext';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
-const MainLayout = ({ user, handleLogout, title = "DASHBOARD" }) => {
+const MainLayout = ({ title = "DASHBOARD" }) => {
+    const {user, handleLogout} = useContext(AppContext);
     return (
         <div className="min-h-screen bg-gray-50 font-sans text-gray-900 flex">
             <Sidebar user={user} handleLogout={handleLogout} />

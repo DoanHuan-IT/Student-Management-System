@@ -18,9 +18,15 @@ import StudentProfile from "./components/Student/StudentProfile";
 //main
 import MainLayout from "./layouts/MainLayout";
 
+//context
+import { AppContext } from "./context/AppContext";
+import { useContext } from "react";
+
 const ForbiddenPage = () => <h1 className="text-center mt-10 text-red-500">403 - Forbidden!!!</h1>;
 
-export default function AppRouter({user, handleLogin, handleLogout}) {
+export default function AppRouter() {
+    const {user, handleLogin, handleLogout} = useContext(AppContext);
+
     const isAuthenticated = !!user;
     const userRole = user?.role || "";
 

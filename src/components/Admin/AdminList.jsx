@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import {AppContext} from '~/context/AppContext';
 import {getUsersAPI} from "~/services/userService";
 
 
-const AdminList = ({user}) => {
+const AdminList = () => {
+    const {user} = useContext(AppContext);
     const [admins, setAdmins] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

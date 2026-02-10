@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
+import {AppContext} from '~/context/AppContext';
 import {getStudentsAPI} from "~/services/studentService";
 
-const StudentList = ({user}) => {
+const StudentList = () => {
+    const {user} = useContext(AppContext);
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

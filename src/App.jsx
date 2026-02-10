@@ -1,31 +1,18 @@
 import React from 'react'
-import {useState} from "react";
-import {logoutAPI} from "./services/authJWT";
 import AppRouter from './AppRouter';
+import { AppProvider } from './context/AppProvider';
+import {Toaster} from 'react-hot-toast';
 
 function App() {
-  const [user, setUser] = useState(() => {
-    const saveUser = localStorage.getItem('user');
-    const saveToken = localStorage.getItem('accessToken');
-
-    return (saveUser && saveToken) ? JSON.parse(saveUser) : null;
-  });
-
-  const handleLogin = (userData) => {
-    setUser(userData);
-  }
-
-  const handleLogout = () => {
-    logoutAPI();
-    setUser(null);
-  }
 
   return (
-      <AppRouter
-        user={user}
-        handleLogin={handleLogin}
-        handleLogout={handleLogout}
+    <AppProvider>
+      <AppRouter/>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
       />
+    </AppProvider>
   )
 }
 
